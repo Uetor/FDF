@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedrogon <pedrogon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:27:34 by pedrogon          #+#    #+#             */
-/*   Updated: 2023/09/19 21:37:01 by pedrogon         ###   ########.fr       */
+/*   Updated: 2023/09/27 02:02:43 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static char	*ft_read(int fd, char *buffer)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	char static	*buffer;
+	static char *buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

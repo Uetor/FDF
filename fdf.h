@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedrogon <pedrogon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:39:06 by pedrogon          #+#    #+#             */
-/*   Updated: 2023/09/21 19:27:00 by pedrogon         ###   ########.fr       */
+/*   Updated: 2023/09/28 03:30:27 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,28 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+
+typedef struct s_data
+{
+    //Matriz y variables.
+    int y_matrix;
+    int x_matrix;
+    char **matrix;
+
+    //Dirección
+    char *dir;
+    char *file;
+
+    //Read
+    int fd;
+    char *line;
+}t_data;
+
+// Función para compbrobar el mapa.
+int	count_word(const char *str, char c);
+
 
 #endif
