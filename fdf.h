@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedrogon <pedrogon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:39:06 by pedrogon          #+#    #+#             */
-/*   Updated: 2023/09/28 03:30:27 by pedro            ###   ########.fr       */
+/*   Updated: 2023/09/28 19:49:17 by pedrogon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@
 typedef struct s_data
 {
     //Matriz y variables.
-    int y_matrix;
-    int x_matrix;
-    char **matrix;
+	int		y_matrix;
+	int		x_matrix;
+	char	**matrix;
 
-    //Dirección
-    char *dir;
-    char *file;
+    //Direction
+	char	*dir;
+	char	*file;
 
     //Read
-    int fd;
-    char *line;
+	int		fd;
+	char	*line;
 }t_data;
 
 // Función para compbrobar el mapa.

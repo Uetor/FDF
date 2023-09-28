@@ -7,8 +7,8 @@ SRC  =  main.c \
 OBJS        = $(SRC:.c=.o)
 CC	        = gcc
 CFLAGS      = -Wall -Werror -Wextra
-GLFW_FLAGS  = -ldl -lglfw -lm
-#GLFW_FLAGS = -lglfw -L /Users/pedrogon/.brew/opt/glfw/lib/ -lm
+#GLFW_FLAGS  = -ldl -lglfw -lm
+GLFW_FLAGS = -lglfw -L /Users/pedrogon/.brew/opt/glfw/lib/ -lm
 MLX42_PATH  = ./MLX42
 LIBFT_PATH  = ./libft
 RM	        = rm -f
