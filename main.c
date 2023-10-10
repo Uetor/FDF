@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedrogon <pedrogon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:47:08 by pedrogon          #+#    #+#             */
-/*   Updated: 2023/09/28 19:54:49 by pedrogon         ###   ########.fr       */
+/*   Updated: 2023/10/10 03:31:48 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,27 @@ int	count_word(const char *str, char c)
 	return (i);
 }
 
-void	ft_coma(char *str)
+/*Esta función me realiza un dos split para dividir la linea palabra por palabra y con el segundo 
+dividimos las palabras que traen una coma para diferenciar la altura de la parte que es un color*/
+
+void	ft_coma(t_data *data)
 {
 	char	**coma;
-	int		i;
+	char	**doble;// Los nombres de las variables hay que cambiarlos.
 	int		j;
+	int		i;
 
-	coma = ft_split(str, ' ');//He separado la linea en palabras y me queda buscar si tiene alguna coma y si la tiene dividir esa palabra en dos y dicer que lo que hay detrás de la coma es un color.
+	
+	coma = ft_split(data->line, ' ');//Me falta que después de haberlo dividido todo indicar cual es el color
 	i = 0;
-	j = 0;
-	while (coma != NULL)
+	while (coma[i])
 	{
-		if (coma[i][j] == ',')
-		while (coma != NULL)
+		doble = ft_split(coma[i], ',');//Antes de meter doble en points tengo que transformarlos en enteros, ya que esto es un string.
+		j = 0;
+		while (doble[j])
 		{
-			printf("%s ", coma[i][j]);
+			printf("%s ", doble[j]);
+			j++;
 		}
 		i++;
 	}
@@ -59,25 +65,46 @@ int	main(int argc, char *argv[])
 	t_data	data;
 	int		len;
 	int		check;
+	int		high;
 
-	if (argc > 1)
+	if (argc == 2)
 	{
 		data.dir = ft_strdup("./test_maps/");
 		data.file = ft_strjoin(data.dir, argv[1]);
 		data.fd = open(data.file, O_RDONLY);
-		data.line = get_next_line(data.fd);
+		data.line = get_next_line(data.fd);// Esto lo volvemos a repetir, importante para hacer una función
 		check = count_word(data.line, ' ');
-		while (data.line != NULL)
+		high = 0;
+		while (data.line != NULL) // El primer get_next_line lo seguimos con esta función
 		{
-			//data.coma = ft_split(data.line, ',');//Tengo que hacer una función para ver cada linea.
-			ft_coma(data.line);
 			len = count_word(data.line, ' ');
-			//printf("%d\n", len);
 			data.line = get_next_line(data.fd);
+			high++;
 			if (len != check)
 				return (1);
 		}
+		close(data.fd);
+		data.x_matrix = len;
+		data.y_matrix = high;
+		data.matrix = malloc(sizeof(t_point *) * data.y_matrix);
+		int	altura = 0;
+		while (altura < data.y_matrix)
+		{	
+			data.matrix[altura] = malloc(sizeof(t_point) * data.x_matrix); 
+			altura++;
+		}
+		data.fd = open(data.file, O_RDONLY);
+		data.line = get_next_line(data.fd);
+		int contador = 0;
+		while (data.line != NULL)
+		{
+			ft_coma(&data);
+			data.line = get_next_line(data.fd);
+			contador++;
+		}
+
 	}
+	printf("La x vale %d y la y %d\n", data.x_matrix, data.y_matrix);
 	write(1, "\n", 1);
 	return (0);
 }
